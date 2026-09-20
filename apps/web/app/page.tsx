@@ -6,8 +6,12 @@ export default async function Home() {
   
   return (
     <div>
+      firstName:
       {user?.username}
+      password:
       {user?.password }
+
+      Hey guys! How are you doing?
     </div>
   );
 }
