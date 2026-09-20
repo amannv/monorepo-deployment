@@ -1,0 +1,26 @@
+---
+name: Push to DEV Cluster
+on:
+  push:
+    branches:
+      - main
+jobs:
+  redeploy_everything:
+    name: Deploy Monorepo on DEV Cluster
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH commands using SSH key
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd monorepo-deployment
+            git pull
+            pnpm install
+            pnpm run build
+            pm2 restart http-backend
+            pm2 restart web
+            pm2 restart ws-backend
