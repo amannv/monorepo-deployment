@@ -1,5 +1,5 @@
 ---
-name: Push to DEV Cluster
+name: Push to PROD Cluster
 on:
   push:
     branches:
