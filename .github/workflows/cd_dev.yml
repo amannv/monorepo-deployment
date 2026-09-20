@@ -17,6 +17,18 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            # Load NVM
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            
+            # Use Node 24
+            nvm use 24
+
+            # Verify environment
+            node -v
+            pnpm -v
+            pm2 -v
+            
             cd monorepo-deployment
             git pull
             pnpm install
